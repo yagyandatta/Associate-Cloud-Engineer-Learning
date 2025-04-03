@@ -1,0 +1,70 @@
+1. VM Creation
+-- 
+gcloud compute instances create nucleus-jumphost-751 \
+    --zone=$ZONE \
+    --tags=nucleus-jumphost \
+    --machine-type=e2-micro \
+    --image-family=debian-11 \
+    --image-project=debian-cloud 
+    
+    
+2. LB Template creation:
+gcloud compute instance-templates create nucleus-webserver-template \
+   --network=default \
+   --subnet=default \
+   --tags=allow-health-check \
+   --machine-type=e2-medium \
+   --image-family=debian-11 \
+   --image-project=debian-cloud \
+   --metadata=startup-script='#! /bin/bash
+apt-get update
+apt-get install -y nginx
+service nginx start
+sed -i "s/nginx/Google Cloud Platform - $HOSTNAME/" /var/www/html/index.nginx-debian.html
+systemctl restart nginx'
+
+3. managed instance group:
+gcloud compute instance-groups managed create nucleus-webserver-group \
+   --template=nucleus-webserver-template --size=2 --zone=Zone
+
+4. create a firewall
+-- 
+gcloud compute firewall-rules create allow-tcp-rule-567 \
+    --target-tags allow-health-check --allow tcp:80
+    
+5. Create a health check for the load balancer:
+--
+gcloud compute health-checks create http http-basic-check \
+  --port 80
+  
+6. Create a backend service:
+--
+gcloud compute backend-services create nucleus-webserver-backend \
+  --protocol=HTTP \
+  --port-name=http \
+  --health-checks=http-basic-check \
+  --global
+  
+7. add instance group as the backend to the backend service
+--
+gcloud compute backend-services add-backend nucleus-webserver-backend \
+  --instance-group=nucleus-webserver-group \
+  --instance-group-zone=$ZONE \
+  --global
+  
+8. Create a URL map to route the incoming requests to the default backend service:
+--
+gcloud compute url-maps create web-map-http \
+    --default-service nucleus-webserver-backend
+    
+gcloud compute target-http-proxies create http-lb-proxy \
+    --url-map web-map-http
+
+gcloud compute forwarding-rules create http-content-rule \
+   --address=lb-ipv4-1\
+   --global \
+   --target-http-proxy=http-lb-proxy \
+   --ports=80
+-----------------------------------------------------------------------------
+
+

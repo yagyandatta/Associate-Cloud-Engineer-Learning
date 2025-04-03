@@ -1,0 +1,71 @@
+Concepts:
+
+1. IAAS-PAAS-SAAS  
+-- PAAS model: Pay for what they use
+-- IAAS model: pay for what they allocate
+-- SAAS model: pay as per service consumption 
+
+--- Serverless:
+  i.  Cloud Run: It deploys containerized microservices based application in a fully-managed environments.
+  ii. Cloud Run functions: Manages event-driven code as a pay-as-you-go service
+
+2. Google Cloud Network: (42-regions || 127 AZs)
+
+Geo-Location > regions > Zones
+
+Geo-Location:
+1. North America
+2. South America
+3. Asia
+4. Europe > (europe-west2) > {europe-west2-a, europe-west2-b, europe-west2-c}
+5. Australia
+
+-- Google is the first one to achieve 'ISO 14001 certification' 
+  
+
+3. Security: (6-layers)
+- Hardware infra layer
+-- hardware design and provenance
+-- secure boot stack
+-- premises security
+
+- Service deployment layer:
+-- encryption of inter-service communication
+
+- User identity layer
+-- user identity (Log-in security)
+
+- Storage layer
+-- Encryption at rest
+
+- Internet communication layer
+-- Google Front End (GFE)
+-- Denial of service (DoD) protection
+
+- Operational security layer
+-- intrusion detection
+-- Reducing insider risk
+-- Employee Universal Second factor (U2F) use
+-- Software development practices 
+
+7. Billing
+- per-second billing (compute, gke)
+- instance run for more than 25% of a month --> discount on every incremental minutes
+- Google Cloud Cost Calculator 
+- Features
+-- Budgets (predefined budget)
+-- Alerts (as per you have set budgets)
+-- Reports (monthly usage report in more detailed way)
+-- Quotas (per service to prevent from using wrong way)
+
+
+-------------------
+
+
+
+
+
+
+
+
+

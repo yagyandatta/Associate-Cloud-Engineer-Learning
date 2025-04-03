@@ -1,0 +1,56 @@
+Day-2 | Session
+-------------------------------------
+ compute engines | Dtaproc 
+ 
+-------------------------------------
+Cloud Identity and Access Management
+
+- [who, can do what, on  which resource]
+- Granular Accesss:
+-- Granular access control, also known as fine-grained access control, is a security mechanism that allows organizations to manage and restrict access to their resources, systems, or data at a highly detailed and specific level.
+
+- Type of Roles:
+-- Basic: IAM basic roles are the most limited form of GCP roles and include owners, editors, and viewers
+-- predefined: Predefined roles provide finer-grain access to specific services in the Google Cloud. 
+-- custom: Custom roles provide finer-grain access to an organization-specific list of permissions to meet specific needs. 
+
+- Basic Roles:
+-- owner: invite/removes members, delete projects 
+-- Editor: modify
+-- Viewer: read-only
+-- Billing Administrator: manage billings 
+
+-------------------------------------
+COMPUTE
+
+
+- sole-tenant Nodes : dedicated to single customer
+-- Dedicated hardware 
+-- full access to host resources for 10% premium.
+
+
+- Manage Instance Groups :run Vms at Scale
+-- High availabilty : (autoscaling, )
+
+- stateful Vs stateless
+
+
+- instance group
+-- unmanaged
+-- managed 
+
+
+- MIG-AUTOSCALING:(Managed instance group)
+- CPU Utilization 
+- External HTTPS Capacity
+- Cloud monitoring Metrics
+- Schedules
+
+-------------------------------------
+DATAPROC (Managed Spark and Hadoop service)
+
+- 
+-------------------------------------
+Dataflow (fully-managed ETL tool, Streaming flow)
+
+
